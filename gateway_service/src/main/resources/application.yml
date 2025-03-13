@@ -1,0 +1,87 @@
+server:
+  port: 8070
+
+spring:
+  main:
+    banner-mode: off
+  application:
+    name: gateway_service
+  cloud:
+    gateway:
+      mvc:
+        routes:
+          - id: book_service_admin
+            uri: http://localhost:8075
+            predicates:
+              - Path=/admin/**
+            filters:
+              - TokenRelay=
+              - RemoveRequestHeader=Cookie
+          - id: book_service
+            uri: http://localhost:8075
+            predicates:
+              - Path=/books/**
+            filters:
+              - RemoveRequestHeader=Cookie
+          - id: covers
+            uri: http://localhost:8076
+            predicates:
+              - Path=/cover
+            filters:
+              - RemoveRequestHeader=Cookie
+          - id: covers_admin
+            uri: http://localhost:8076
+            predicates:
+              - Path=/cover/**
+            filters:
+              - TokenRelay=
+              - RemoveRequestHeader=Cookie
+          - id: book_fb2
+            uri: http://localhost:8076
+            predicates:
+              - Path=/fb2
+            filters:
+              - RemoveRequestHeader=Cookie
+          - id: book_fb2_admin
+            uri: http://localhost:8076
+            predicates:
+              - Path=/fb2/**
+            filters:
+              - TokenRelay=
+              - RemoveRequestHeader=Cookie
+          - id: book_pdf
+            uri: http://localhost:8076
+            predicates:
+              - Path=/pdf
+            filters:
+              - RemoveRequestHeader=Cookie
+          - id: book_pdf_admin
+            uri: http://localhost:8076
+            predicates:
+              - Path=/pdf/**
+            filters:
+              - TokenRelay=
+              - RemoveRequestHeader=Cookie
+          - id: orders
+            uri: http://localhost:8077
+            predicates:
+              - Path=/order/**
+            filters:
+              - RemoveRequestHeader=Cookie
+          - id: orders_admin
+            uri: http://localhost:8077
+            predicates:
+              - Path=/order/admin/**
+            filters:
+              - TokenRelay=
+              - RemoveRequestHeader=Cookie
+
+logging:
+  level:
+    org.springframework: "DEBUG"
+    ru.kirius: "DEBUG"
+  pattern:
+    console: "%d{dd-MM-yyyy HH:mm:ss} - %msg%n"
+    file: "%d{dd-MM-yyyy HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n"
+  file:
+    name: "./logs/gatewayServiceLogs.log"

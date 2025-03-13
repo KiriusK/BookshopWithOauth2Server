@@ -1,0 +1,34 @@
+app:
+  clientSecret: "{noop}secret"
+  adminService: "http://127.0.0.1:8085/login/oauth2/code/adminService"
+server:
+  port: 8090
+spring:
+  main:
+    banner-mode: off
+  application:
+    name: authorization_service
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5433/postgres
+    username: postgres
+    password: postgres
+  integration:
+    jdbc:
+      schema: classpath:schema.sql
+  sql:
+    init:
+      mode: always
+
+    postgres:
+      console:
+        enabled: true
+logging:
+  level:
+    org.springframework: "DEBUG"
+    ru.kirius: "DEBUG"
+  pattern:
+    console: "%d{dd-MM-yyyy HH:mm:ss} - %msg%n"
+    file: "%d{dd-MM-yyyy HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n"
+  file:
+    name: "./logs/authServiceLogs.log"

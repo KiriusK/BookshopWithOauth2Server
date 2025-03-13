@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Add book</title>
+</head>
+<style>
+    .elem{
+        display:flex;
+        direction:row;
+    }
+</style>
+<body>
+<h1>Добавление книги</h1>
+<form th:action="${webService}+@{/save}" method="post">
+    <fieldset>
+        <div class="elem">
+            <span>Название книги:</span>
+            <input type="text" name="name" required>
+        </div>
+        <div class="elem">
+            <span>Имя автора:</span>
+            <input type="text" name="authorName" required>
+        </div>
+        <div class="elem">
+            <span>Фамилия автора:</span>
+            <input type="text" name="authorSurName" required>
+        </div>
+        <div class="elem">
+            <span>Описание книги:</span>
+            <textarea name="description" required></textarea>
+        </div>
+        <div class="elem">
+            <span>Обложка:</span>
+            <input type="file" name="bookCover" required>
+        </div>
+        <div class="elem">
+            <span>Книга цифровая?:</span>
+            <input type="checkbox" name="isDigit">
+        </div>
+        <div class="elem">
+            <span>Книга в формате pdf:</span>
+            <input type="file" name="pdfBook">
+        </div>
+        <div class="elem">
+            <span>Книга в формате fb2</span>
+            <input type="file" name="fb2Book">
+        </div>
+        <div class="elem">
+            <span>Количество:</span>
+            <input type="text" max="100000" name="quantity" required>
+        </div>
+        <div class="elem">
+            <span>Цена книги:</span>
+            <input type="text" max="1000000" name="price" required>
+        </div>
+        <div class="elem">
+            <input type="submit" value="Отправить данные">
+        </div>
+
+
+    </fieldset>
+</form>
+
+</body>
+</html>

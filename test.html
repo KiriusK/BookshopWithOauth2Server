@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Test</title>
+</head>
+<body>
+
+</body>
+<script>
+    async function getData() {
+            var url = "http://localhost:8076/fb2/get";
+            //var data = new FormData();
+            //data.append("fileName","096d54b8-5779-4a8d-9b47-238352d951ea.zip");
+            //data.append("bookName","Война и мир");
+            var objArr = await fetch(url, {
+            method: "POST"
+            , mode: "no-cors"
+            , headers: {"Content-Type": "application/json;charset=UTF-8"}
+            , body: {"fileName":"096d54b8-5779-4a8d-9b47-238352d951ea.zip"
+            , "bookName":"Война и мир" }
+            });
+            objArr = await objArr.json();
+            console.log(objArr);
+        }
+    window.onload = getData();
+</script>
+</html>

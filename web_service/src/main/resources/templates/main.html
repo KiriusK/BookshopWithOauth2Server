@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Bookshop</title>
+</head>
+<style>
+    a {
+    margin: 1px 3px;
+    border: 1px solid black;
+    border-radius: 3px;
+    }
+
+    .Main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    }
+
+    .BookCont {
+    display: flex;
+    flex-direction: row;
+    margin: 5px 0px;
+    }
+
+    .Name {
+    display: flex;
+    flex-direction: column;
+    margin: 0px 10px;
+    }
+
+    .Buttons {
+    display: flex;
+    }
+
+</style>
+<body>
+<div class="Main">
+    <h1>Добро пожаловать в <span th:text="${bookshopName}"></span></h1>
+    <div class="Buttons">
+        <span>Выберите интересующий вас формат книги: </span>
+        <span>
+            <a th:href="@{${webService}}">Все</a>
+            <a th:href="${webService}+@{/digit}">Цифровые</a>
+            <a th:href="${webService}+@{/paper}">Бумажные</a>
+        </span>
+        <span>
+            <form th:action="@{${webService}+'/search'}" method="get">
+                <fieldset>
+                    <input type="text" name="searchStr">
+                    <input type="submit" value="Искать">
+                </fieldset>
+            </form>
+        </span>
+    </div>
+    <div class="BookCont" th:each="book: ${books}">
+
+        <div>
+            <img width="300px" height="150px" th:src="${gateway}+@{/cover(coverUrl=${book.bookCoverUrl()})}"
+                 alt="Book cover">
+        </div>
+        <div class="Name">
+            <span th:text="${book.name()}"></span>
+            <span th:text="${book.authorName()}"></span>
+            <span th:text="${book.authorSurName()}"></span>
+            <span>
+                    <span>Формат: </span>
+                    <span th:text="((${book.isDigit()})?'Цифровой':'Бумажный')"></span>
+                </span>
+            <span>
+                    <span>Стоимость: </span>
+                    <span th:text="${book.price()}"></span>
+                </span>
+        </div>
+        <div>
+            <span th:text="${book.description()}"></span>
+        </div>
+        <div>
+            <a th:href="${webService}+@{/buy(id=${book.id()})}+'&isDigit='+${book.isDigit()}">Купить</a>
+        </div>
+
+    </div>
+
+</div>
+</body>
+</html>

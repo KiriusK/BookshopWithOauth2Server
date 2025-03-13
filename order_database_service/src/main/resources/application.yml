@@ -1,0 +1,37 @@
+server:
+  port: 8077
+spring:
+  main:
+    banner-mode: off
+  application:
+    name: order_database_service
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5433/postgres
+    username: postgres
+    password: postgres
+  integration:
+    jdbc:
+      schema: classpath:schema.sql
+  sql:
+    init:
+      mode: always
+  postgres:
+    console:
+      enabled: true
+
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: http://localhost:8090
+
+logging:
+  level:
+    org.springframework: "WARN"
+    ru.kirius: "WARN"
+  pattern:
+    console: "%d{dd-MM-yyyy HH:mm:ss} - %msg%n"
+    file: "%d{dd-MM-yyyy HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n"
+  file:
+    name: "./logs/orderDbLogs.log"

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Bookshop</title>
+</head>
+<style>
+    a {
+    margin: 1px 3px;
+    }
+
+    .Main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    }
+
+    .BookCont {
+    display: flex;
+    flex-direction: row;
+    margin: 5px 0px;
+    width: -webkit-fill-available;
+    }
+
+    .Name {
+    display: flex;
+    flex-direction: column;
+    margin: 0px 10px;
+    }
+
+    .Buttons {
+    display: flex;
+    }
+
+</style>
+<body>
+<div class="Main">
+    <h1>Добро пожаловать в <span th:text="${bookshopName}"></span></h1>
+    <div class="Buttons">
+        <span>Выберите интересующий вас формат книги: </span>
+        <a href="http://localhost:8080">Все</a>
+        <a href="http://localhost:8080/digit">Цифровые</a>
+        <a href="http://localhost:8080/paper">Бумажные</a>
+    </div>
+    <table>
+        <tbody>
+        <tr th:each="book: ${books}">
+            <td class="BookCont">
+                <div><img width="300px" height="150px" th:src="@{http://localhost:8070/cover(coverUrl=${book.bookCoverUrl})}" alt="Book cover">
+                </div>
+                <div class="Name">
+                    <span th:text="${book.name()}"></span>
+                    <span th:text="${book.authorName()}"></span>
+                    <span th:text="${book.authorSurName()}"></span>
+                    <span>
+                        <span>Формат: </span>
+                        <span th:text="((${book.isDigit()})?'Цифровой':'Бумажный' )"></span>
+                    </span>
+                    <span>
+                        <span>Стоимость: </span>
+                        <span th:text="${book.price()}"></span>
+                    </span>
+                </div>
+                <div>
+                    <span th:text="${book.description}"></span>
+                </div>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>
