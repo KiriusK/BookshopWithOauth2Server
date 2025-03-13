@@ -25,8 +25,8 @@ spring:
         enabled: true
 logging:
   level:
-    org.springframework: "DEBUG"
-    ru.kirius: "DEBUG"
+    org.springframework: "WARN"
+    ru.kirius: "WARN"
   pattern:
     console: "%d{dd-MM-yyyy HH:mm:ss} - %msg%n"
     file: "%d{dd-MM-yyyy HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n"
