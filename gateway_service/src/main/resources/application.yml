@@ -15,7 +15,6 @@ spring:
             predicates:
               - Path=/admin/**
             filters:
-              - TokenRelay=
               - RemoveRequestHeader=Cookie
           - id: book_service
             uri: http://localhost:8075
@@ -34,7 +33,6 @@ spring:
             predicates:
               - Path=/cover/**
             filters:
-              - TokenRelay=
               - RemoveRequestHeader=Cookie
           - id: book_fb2
             uri: http://localhost:8076
@@ -47,7 +45,6 @@ spring:
             predicates:
               - Path=/fb2/**
             filters:
-              - TokenRelay=
               - RemoveRequestHeader=Cookie
           - id: book_pdf
             uri: http://localhost:8076
@@ -60,7 +57,6 @@ spring:
             predicates:
               - Path=/pdf/**
             filters:
-              - TokenRelay=
               - RemoveRequestHeader=Cookie
           - id: orders
             uri: http://localhost:8077
@@ -73,7 +69,6 @@ spring:
             predicates:
               - Path=/order/admin/**
             filters:
-              - TokenRelay=
               - RemoveRequestHeader=Cookie
 
 logging:
